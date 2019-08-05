@@ -1,13 +1,20 @@
-
+/**
+ * Time Complexity: O(n)
+ * Space Complexity : O(k) - k is size of queue
+ * Idea:
+ * 1. Perform Level order traversal comparing node's values in each level and find the max value
+ * Leetcode: yes
+ * 
+ */
 import java.util.*;
 
 class TreeNode {
-    int data;
+    int val;
     TreeNode left;
     TreeNode right;
 
-    TreeNode(int data){
-        this.data = data;
+    TreeNode(int val){
+        this.val = val;
         this.left = this.right = null;
     }
 }
@@ -19,55 +26,24 @@ class LargestValueInRow {
         if(root == null) return result;
 
         Queue<TreeNode> mq = new LinkedList<>();
-        Queue<TreeNode> tq = new LinkedList<>();
+        // Queue<TreeNode> tq = new LinkedList<>();
         mq.add(root);
-        result.add(root.data);
+       // result.add(root.val);
         while(!mq.isEmpty()){
-            TreeNode curr = mq.poll();
 
-            if(curr.left != null) tq.add(curr.left);
-            if(curr.right != null) tq.add(curr.right);
-            
-            if(mq.isEmpty() && !tq.isEmpty()){
-                int maxValue = Integer.MIN_VALUE;
-                while(!tq.isEmpty()){
-                    TreeNode levelEle = tq.poll();
-                    if(levelEle.data > maxValue){
-                        maxValue = levelEle.data;
-                    }
-                    mq.add(levelEle);
-
+            int numberOfNodes = mq.size();
+            int maxValue = Integer.MIN_VALUE;
+            for(int i=0;i<numberOfNodes;i++){
+                TreeNode curr = mq.poll();
+                if(curr.val > maxValue){
+                    maxValue = curr.val;
                 }
-                result.add(maxValue);
+                if(curr.left != null) mq.add(curr.left);
+                if(curr.right != null) mq.add(curr.right);
             }
+            result.add(maxValue);
         }
         return result;
-    }
-
-    public void bfs(TreeNode root, List<Integer> result){
-        Queue<TreeNode> mq = new LinkedList<>();
-        Queue<TreeNode> tq = new LinkedList<>();
-        mq.add(root);
-        result.add(root.data);
-        while(!mq.isEmpty()){
-            TreeNode curr = mq.poll();
-
-            if(curr.left != null) tq.add(curr.left);
-            if(curr.right != null) tq.add(curr.right);
-            
-            if(mq.isEmpty() && !tq.isEmpty()){
-                int maxValue = Integer.MIN_VALUE;
-                while(!tq.isEmpty()){
-                    TreeNode levelEle = tq.poll();
-                    if(levelEle.data > maxValue){
-                        maxValue = levelEle.data;
-                    }
-                    mq.add(levelEle);
-
-                }
-                result.add(maxValue);
-            }
-        }
     }
 }
 
