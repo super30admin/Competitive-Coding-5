@@ -1,0 +1,28 @@
+// Time Complexity :O(n) -> number of nodes
+// Space Complexity :O(2ˆh) ~ O(n) -> Stack space
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+//Approach:
+1. Do the level order traversal .
+2. In each level find the maximum node value and add it to the list.
+
+public List<Integer> largestValues(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        if(root == null)    return result;
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            int max = Integer.MIN_VALUE;
+            while(size>0){
+                TreeNode current = queue.poll();
+                max = Math.max(max,current.val);
+                if(current.left!=null)  queue.add(current.left);
+                if(current.right!=null) queue.add(current.right);
+                size--;
+            }
+            result.add(max);
+        }
+        return result;
+    }
