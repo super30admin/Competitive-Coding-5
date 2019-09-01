@@ -1,0 +1,81 @@
+class Solution {
+    public boolean check_fin(int i,int j,char[][] ch)
+    {
+        Map<Character,Integer> sc=new HashMap<>();
+        for(int p=i;p<i+3;p++)
+        {
+            for(int q=j;q<j+3;q++)
+            {
+                if(sc.containsKey(ch[p][q]) && ch[p][q]!='.')
+                {
+                    return false;
+                }
+                else
+                {
+                    sc.put(ch[p][q],1);
+                }
+            }
+        }
+        sc.clear();
+        return true;
+    }
+    public boolean square_check(char[][] ch)
+    {
+        for(int i=0;i<9;i=i+3)
+        {
+            for(int j=0;j<9;j=j+3)
+            {
+                if(check_fin(i,j,ch)==false)
+                {
+                    return false;
+                }
+            }
+        }
+       return true;    
+    }
+    public boolean check(char[][] ch)
+    {
+        Map<Character,Integer> sc=new HashMap<>();
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                if(sc.containsKey(ch[i][j]) && ch[i][j]!='.')
+                {
+                    return false;
+                }
+                else
+                {
+                    sc.put(ch[i][j],1);
+                }
+            }
+            sc.clear();
+        }
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                //System.out.println()
+                if(sc.containsKey(ch[j][i]) && ch[j][i]!='.')
+                { 
+                    return false;
+                }
+                else
+                {
+                    sc.put(ch[j][i],1);
+                }
+            }
+            sc.clear();
+        }
+        return true;
+    }
+    public boolean isValidSudoku(char[][] board) 
+    {
+        boolean flag=check(board);
+        if(flag==true)
+        {
+            flag=square_check(board);
+        }
+        return flag;
+    }
+}
