@@ -1,0 +1,19 @@
+class Solution {
+    public List<Integer> largestValues(TreeNode root) {
+	    
+        if (root == null) return new ArrayList<>();
+        List<Integer> maxes = new ArrayList<>();
+        findMax(root, maxes, 0);
+        return maxes;
+    }
+    
+    private void findMax(TreeNode root, List<Integer> maxes, int level) {
+        if (root == null) return;
+       if (maxes.size() == level) maxes.add(root.val);
+        else if (maxes.get(level) < root.val) maxes.set(level, root.val);
+        findMax(root.left, maxes, level + 1);
+        findMax(root.right, maxes, level + 1);
+    }
+}
+//TC: O(n)
+//Space: O(h)
