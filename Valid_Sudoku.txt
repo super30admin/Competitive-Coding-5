@@ -1,0 +1,33 @@
+// Time Complexity : O(9*9) = O(1)
+// Space Complexity : O(9*9 + 9*9 + 9*9) = O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+/* space can be reduced by checking row  column and block seperately  using 3 for loops*/
+
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+       
+       /* to keep track value has be seen in row, column and block */ 
+       boolean[][] row = new boolean[9][9];
+       boolean[][] column = new boolean[9][9];
+       boolean[][] block = new boolean[9][9];
+       
+        /* iterate over sudoku */
+       for(int i = 0;i<9;i++){
+           for(int j=0;j<9;j++){
+                int c = board[i][j] - '1';       
+                if(board[i][j]=='.'){
+                    continue;
+                }
+                 // if value is already there in row block or column then return false
+                if(row[i][c] || column[j][c] || block[i - i % 3 + j / 3][c]){
+                    return false;
+                }
+               // update the value seen to be true
+                row[i][c] = column[j][c] = block[i - i % 3 + j / 3][c] = true;
+           }
+       }
+       return true; // by default return true
+    }
+}
