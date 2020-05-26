@@ -28,7 +28,11 @@ class Solution:
         queue.append(root)
 
         while queue:
-            size = len(queue)  #to traverse till the end of the level
+            """
+            #Size variable is required as need to process distinct group of values i.e
+            max value at each level
+            """
+            size = len(queue)
             maximumval = -float('inf')
             for i in range(size):
                 node = queue.popleft()
