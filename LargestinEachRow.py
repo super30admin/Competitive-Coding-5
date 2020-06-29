@@ -43,4 +43,32 @@ class Solution(object):
         return self.result
         
         //Approach - DFS
+ //Time Complexity - O(n)
+//Space Complexity - O(n/2)
+//Did the code run on leet code - Yes
         
+        # Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    result = None
+    def largestValues(self, root):
+                  
+        self.result = [] 
+        if not root:
+            return self.result
+        self.helper(root,0)
+        return self.result
+    def helper(self,root,level):
+        if not root:
+            return
+        if(level == len(self.result)):
+            
+            self.result.append(root.val)
+        self.result[level] = max(root.val, self.result[level])
+        
+        self.helper(root.left,level+1)
+        self.helper(root.right,level+1)
