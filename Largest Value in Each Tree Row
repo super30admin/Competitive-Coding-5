@@ -1,0 +1,74 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+//DFS
+// Time Complexity :O(n)
+// Space Complexity :O(h)
+// Did this code successfully run on Leetcode :Yes
+// Any problem you faced while coding this :No
+// Approach
+//1) Iterate over the tree by maintaining the level at each root.
+//2) If the value at that level is not there in the list then put the first found value at that level in the list
+//3) else compare the new value of that level with the previously stored value, if the new value is greater update it else keep it the same
+
+//BFS
+// Time Complexity :O(n)
+// Space Complexity :O(n/2)
+// Did this code successfully run on Leetcode :Yes
+// Any problem you faced while coding this :No
+// Approach
+//Store all the values of every level in to queue.
+//find the largest of all values for every level and put in the result
+//continue iteration
+class Solution {
+    List<Integer> result;
+    public List<Integer> largestValues(TreeNode root) {
+        result = new ArrayList<>();
+        if(root == null)return result;
+        dfs(root, 0);
+        return result;
+    }
+    public void dfs(TreeNode root, int level){
+        //base
+        if(root == null)return;
+        //logic
+        if(level == result.size())result.add(root.val);
+        else{
+            result.set(level, Math.max(result.get(level), root.val));
+        }
+        dfs(root.left, level+1);
+        dfs(root.right, level+1);
+    }
+    
+    
+    public List<Integer> largestValues1(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if(root == null)return result;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            int size = q.size();
+            int max = Integer.MIN_VALUE;
+            for(int i=0;i<size;i++){
+                TreeNode cur = q.poll();
+                max = Math.max(cur.val, max);
+                if (cur.left != null) q.add(cur.left);
+                if (cur.right != null) q.add(cur.right);
+            }
+            result.add(max);
+        }
+        return result;
+    }
+}
