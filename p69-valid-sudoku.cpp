@@ -44,7 +44,7 @@ public:
     }
 };
 
-
+// Brute Force Solution
 // Time complexity is O(1) (since size of sudoku is always 9*9)
 // Space complexity is O(1)
 // Did this code successfully run on Leetcode : Yes
