@@ -1,0 +1,67 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+/**
+ * Time Complexity: O(N) where N is the number of nodes in the binary tree
+ * Space Complexity: O(N) where N is the number of nodes in binary tree
+ * LeetCode: Y (https://leetcode.com/problems/find-largest-value-in-each-tree-row/)
+ * Approach:
+ *       Traverse the tree depth-first tracking the level
+ *       update max at that level
+ *       Explore left sub-tree
+ *       Explore right sub-tree
+ *       Enqueue root
+*/
+class Solution {
+    // result arrayList
+    List<Integer> result;
+    public List<Integer> largestValues(TreeNode root) {
+        // Initialize result arraylist
+        result = new ArrayList<>();
+        
+        // check edge case
+        if(root == null) {
+            return result;
+        }
+        
+        // start traversing tree depth-first keeping track of the level
+        dfs(root, 0);
+        
+        return result;
+        
+    }
+    
+    private void dfs(TreeNode root, int level) {
+        // base condition
+        if(root == null) {
+            return;
+        }
+        
+        // if the current level's max is not seen yet then add it to result arraylist
+        if(result.size() == level) {
+            result.add(root.val);
+        }
+        // if there exists a current level's max then update if the val of current node is greater
+        else {
+            result.set(level, Math.max(root.val, result.get(level)));
+        }
+        
+        // Explore the left sub-tree of current node
+        dfs(root.left, level + 1);
+        
+        // Explore the right sub-tree of current node
+        dfs(root.right, level + 1);
+    }
+}
