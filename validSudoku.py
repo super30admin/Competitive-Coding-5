@@ -11,28 +11,50 @@
 # Your code here along with comments explaining your approach
 
 
+# class Solution:
+#     def isValidSudoku(self, board: List[List[str]]) -> bool:
+#         if not board:
+#             return False
+#         #row
+#         for i in range(len(board)):
+#             seen = set()
+#             for j in range(len(board[0])):
+#                 if board[i][j] != '.':
+#                     if board[i][j] in seen:
+#                         return False
+#                     else:
+#                         seen.add(board[i][j])
+#         #col
+#         for i in range(len(board)):
+#             seen = set()
+#             for j in range(len(board[0])):
+#                 if board[j][i] != '.':
+#                     if board[j][i] in seen:
+#                         return False
+#                     else:
+#                         seen.add(board[j][i])
+        
+#         #use two for loops 
+#         #create a string for each grid/box for gridBox
+#         seen = set()
+#         for i in range(len(board)):
+#             for j in range(len(board[0])):
+#                 if board[i][j] != '.':
+#                     rowVal = i//3
+#                     colVal = j//3
+#                     val = [board[i][j]]
+#                     uniqueID = str(rowVal) + str(val) + str(colVal)
+#                     if uniqueID in seen:
+#                         return False
+#                     else:
+#                         seen.add(uniqueID)
+                        
+#         return True
+
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         if not board:
             return False
-        #row
-        for i in range(len(board)):
-            seen = set()
-            for j in range(len(board[0])):
-                if board[i][j] != '.':
-                    if board[i][j] in seen:
-                        return False
-                    else:
-                        seen.add(board[i][j])
-        #col
-        for i in range(len(board)):
-            seen = set()
-            for j in range(len(board[0])):
-                if board[j][i] != '.':
-                    if board[j][i] in seen:
-                        return False
-                    else:
-                        seen.add(board[j][i])
         
         #use two for loops 
         #create a string for each grid/box for gridBox
@@ -44,9 +66,13 @@ class Solution:
                     colVal = j//3
                     val = [board[i][j]]
                     uniqueID = str(rowVal) + str(val) + str(colVal)
-                    if uniqueID in seen:
+                    uniqueIDRow =  str(val) + 'in row' + str(i)
+                    uniqueIDCol =  str(val) + 'in col' + str(j)
+
+                    if uniqueID in seen or uniqueIDRow in seen or uniqueIDCol in seen:
                         return False
                     else:
                         seen.add(uniqueID)
-                        
+                        seen.add(uniqueIDRow)
+                        seen.add(uniqueIDCol)
         return True
