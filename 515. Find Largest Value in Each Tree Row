@@ -1,0 +1,38 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+from collections import deque
+class Solution:
+    def largestValues(self, root: TreeNode) -> List[int]:
+        if(not root):
+            return []
+        result = [];
+        # initialize the queue
+        queue = deque();
+        queue.append(root)
+        
+        # apply bfs traversal (level by level traversal) and find the maximum value in each level
+        while(queue):
+            levelsize = len(queue);
+            maxval = float('-inf')
+            for i in range(levelsize):
+                node = queue.popleft();
+                maxval = max(maxval, node.val);
+                if(node.left):
+                    queue.append(node.left);
+                if(node.right):
+                    queue.append(node.right);
+                    
+            result.append(maxval);
+        return result;
+    
+    '''
+    time complexity = O(n)
+    space complexity = O(n)
+    
+    '''
+        
+        
