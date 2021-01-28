@@ -1,43 +1,37 @@
-// Time Complexity : O(n), where n is number of nodes, since we need to visit each node
-// Space Complexity : O(log n) + O(log n), stack space from dfs, space to store level max in hashmap 
+// Time Complexity : O(n), n is num of nodes
+// Space Complexity : O(log n), stack space 
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this : no
 
 // Your code here along with comments explaining your approach
-// I guess the simpler approach is to do a level order traversal and keep track of the max element, bfs 
-// The interviewer had asked to think of a dfs solution,
-// dfs solution, since we traverse depth wise here, initial idea was to traverse all once to find the max depth
-// then intialize an int[max_depth] to store max values at each level  
-// then do a dfs, maintain a depth variable, set and update max value at each level
-// but then rather than 2 pass, a one pass solution is to use a datastructure which allows dynamic addition of elements, used a HashMap
+// use depth, pass result list to recursive fn, recurse on all tree nodes
+// when at level set result[depth] as Max(itself, curNode.val) 
 
 class Solution {
-    private void dfs(TreeNode node, int depth, HashMap<Integer, Integer> map){
-        if(node==null) return;
-        
-        if(!map.containsKey(depth)){
-            map.put(depth, node.val);
-        }
-        else{
-            map.put(depth, Math.max(node.val, map.get(depth))); 
-        }
-        
-        dfs(node.left, depth+1, map);
-        dfs(node.right, depth+1, map);
-    }
-    
     public List<Integer> largestValues(TreeNode root) {
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        if(root==null)
+            return new ArrayList<>();
         
-        int depth = 0;
-        dfs(root, depth, map);
+        List<Integer> result = new ArrayList<>();
         
-        List<Integer> result = new ArrayList<Integer>();
-        
-        for(int i=0; i<map.size(); i++){
-            result.add(map.get(i));
-        }
+        helper(root, 0, result);
         
         return result;
+    }
+    
+    private void helper(TreeNode node, int depth, List<Integer> result){
+        //if null return
+        if(node==null)
+            return;
+        
+        //if result.size==depth, add new item to List
+        if(result.size()==depth)
+            result.add(node.val);
+        //else set result[i] to Max(result[i], node.val)
+        else
+            result.set(depth, Math.max(result.get(depth), node.val));
+        //call helper on node.left, node.right with depth+1
+        helper(node.left, depth+1, result);
+        helper(node.right, depth+1, result);
     }
 }
