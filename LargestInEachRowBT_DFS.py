@@ -1,3 +1,6 @@
+# TC: O(N) since we are processing all the ndoes in the tree. 
+# SC: O(H) where H is the size of the recursive stack or height of the tree.
+
 class Solution:
     def largestValues(self, root: TreeNode) -> List[int]:
         if not root:
