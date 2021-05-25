@@ -1,3 +1,6 @@
+# TC: O(N) since we are traversing all the nodes
+# SC: O(N/2) or O(N) asymptotically, since the maximum length of the queue at worst case will be no. of leaf nodes in a complete binary tree.
+
 class Solution:
     def largestValues(self, root: TreeNode) -> List[int]:
         if not root:
