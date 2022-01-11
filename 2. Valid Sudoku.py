@@ -1,7 +1,7 @@
 from collections import defaultdict
 class Solution:
-    # Time Complexity - O(9*9)
-    # Space Complexity - O(9*9)
+    # Time Complexity - O(n^2)
+    # Space Complexity - O(n^2)
     def isValidSudoku(self, board) -> bool:
         rows = defaultdict(set)
         cols = defaultdict(set)
