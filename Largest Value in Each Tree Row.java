@@ -27,18 +27,25 @@ class Solution {
         q.add(root);
         
         while(!q.isEmpty()){
+            // to maintain the size of the level
             int size  = q.size();
+            // to maintain max value of each level
             int max = Integer.MIN_VALUE;
             
+            // Level wise proccessing
             for(int i = 0; i < size; i++){
                 TreeNode curr = q.poll();
+                // check whether the current node's value is greater than max value
                 if(curr.val > max){
+                    // update max to current node's value
                     max = curr.val;
                 }
                 
+                // adding children of the current node
                 if(curr.left != null) q.add(curr.left);
                 if(curr.right != null) q.add(curr.right);
             }
+            // adding max of each level to the result
             result.add(max);
         }
         return result;
