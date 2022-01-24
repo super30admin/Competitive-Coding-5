@@ -13,6 +13,11 @@
  *     }
  * }
  */
+
+Time complexity:O(n);
+Space:O(height of tree);
+Was able to run on leetcode : yes;
+
 class Solution { List<Integer> result;
     public List<Integer> largestValues(TreeNode root) {
         if(root==null) return new ArrayList<>();
