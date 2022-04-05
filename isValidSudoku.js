@@ -18,7 +18,7 @@ var isValidSudoku = function(board) {
         for(let j=0;j<9;j++) {
             let cell = board[i][j];
             if(cell !== '.') {
-               //Row
+                //Row
                 if(mapRow.has(i) && mapRow.get(i).has(cell)) return false;
                 else {
                     if(!mapRow.has(i)) {
