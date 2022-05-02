@@ -24,7 +24,6 @@ class TreeNode {
 
 public class LargestInRow {
 
-
     // BFS approach
     // TC: O(n) n - number of nodes in a tree
     // SC: O(n) The exact value would be O(n/2). Ignoring the constant -> O(n)
