@@ -1,3 +1,5 @@
+# T.C = O(N X M)  N is the number of rows and M is the number of columns
+# S.C. - O(1) - 9 for rows, 9 for columns and 9 for boxes
 class Solution:
     def isValidSudoku(self, board):
         """
