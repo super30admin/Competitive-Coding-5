@@ -21,5 +21,5 @@ class validSudoku {
     }
 }
 
-//time complexity O(1)
+//time complexity O(n^2)
 //space complexity O(n) where n is number of row/col
