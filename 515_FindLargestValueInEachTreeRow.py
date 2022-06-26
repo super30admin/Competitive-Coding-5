@@ -47,7 +47,6 @@ class Solution:
             self.result[level] = max(self.result[level], root.val)
         self.helper(root.left, level + 1)
         self.helper(root.right, level + 1)
-
     """
     Ideation- BFS TC- O(N), SC-O(N)
     Same idea as DFS approach
