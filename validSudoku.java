@@ -1,7 +1,7 @@
 // https://leetcode.com/problems/valid-sudoku/
 
-// Time Complexity: O(n)
-// Space Complexity: O(n)
+// Time Complexity: O(n^2) Traversing row and column 
+// Space Complexity: O(n^2) Traversing row and column 
 // Did this code successfully run on Leetcode: Yes
 // Any problem you faced while coding this: Took ref from video
 
