@@ -1,8 +1,8 @@
 """
 Leetcode- https://leetcode.com/problems/find-largest-value-in-each-tree-row/ (submitted)
 TC- O(N), SC-O(1) auxiliary DFS
-Challenge-
-Lecture-
+Challenge-NA
+Lecture-https://youtu.be/SOuhsfAe5zI
 FAQ-
 
 

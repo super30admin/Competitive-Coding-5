@@ -1,8 +1,9 @@
 """
+TODO- watch lecture for different implementation for grid check
 Leetcode- https://leetcode.com/problems/valid-sudoku/
 TC- O(3 * 9^4), SC- O(1) - only 9 length of hashmap used
 Challenge-Coming up with grid solution with index
-Lecture-NA
+Lecture-https://youtu.be/ERI-jYg8mHY
 FAQ-
 
 
