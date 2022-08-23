@@ -1,4 +1,4 @@
-// Time Complexity : O(n^2) n=9 iterating through each cell 81 cells foe rows, col, 3*3 grid
+// Time Complexity : O(n^2*n) n=9 iterating through each cell 81 cells for rows, col, 3*3 grid and through the set or boolean array for each search
 // Space Complexity : O(n^2) n=9 considered as constant?
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this : --
@@ -50,6 +50,17 @@ class Solution {
         }
             }
         }
+        // for(int grid = 0; grid < 9; grid ++){ //loop all the 9 grids 
+        //     boolean[] b = new boolean[9];
+        //     for(int i = grid/3*3; i< grid/3*3+3; i++){
+        //         for(int j=grid%3*3; j< grid%3*3+3; j++){
+        //             if(board[i][j]!='.'){
+        //             if(b[(int)(board[i][j]-'1')]) return false;
+        //             b[(int)(board[i][j]-'1')] = true;
+        //          }
+        //       }
+        //     }
+        // }
         return true;
 }
 }
