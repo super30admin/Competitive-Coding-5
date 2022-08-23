@@ -1,14 +1,14 @@
 // Time Complexity : O(n) iterating through each level
 // Space Complexity : O(n) width of the tree for the queue
 // Did this code successfully run on Leetcode : successful
-// Any problem you faced while coding this : no
-
+// Any problem you faced while coding this : ---
 
 // Your code here along with comments explaining your approach
+
 //Iterative soln for BFS using queue
 // will add the root to the queue initially and vary the size of the queue at each level
 //will run a for loop take out (poll) each fifo elements until that size and will check for its the left and right values of the current level nodes and add them to the queue
-// will compare to the other nodes and find tyhe max among them
+// will compare to the other nodes and find the max among them and add them to the list
 import java.util.ArrayList;
 import java.util.*;
 
@@ -58,8 +58,12 @@ public class max_value_atEachLevel {
         node.left.left = new TreeNode(2);
         node.left.right = new TreeNode(4);
         node.right.right = new TreeNode(9);
+        node.left.left.left = new TreeNode(12);
+        node.left.right.left = new TreeNode(24);
+        node.right.right.right = new TreeNode(19);
+        node.right.right.right.right = new TreeNode(29);
         List<Integer> result = bfs(node);
-        result.forEach(System.out::print);
+        result.forEach(System.out::println);
     }
 
 }
