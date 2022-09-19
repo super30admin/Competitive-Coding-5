@@ -21,3 +21,6 @@ public class GreatestValueInEachRow {
         return result;
     }
 }
+
+// Time Complexity - O(n)
+// Space Complexity - O(n)
