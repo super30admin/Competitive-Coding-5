@@ -21,9 +21,9 @@ public class Problem2 {
             }
         }
 
-        for(int b = 0; b< 9; b ++){
-            for(int i = b/3*3; i< b/3*3+3; i++){
-                for(int j=b%3*3; j< b%3*3+3; j++){
+        for(int block = 0; block< 9; block ++){
+            for(int i = block/3*3; i< block/3*3+3; i++){
+                for(int j=block%3*3; j< block%3*3+3; j++){
                     if(board[i][j]!='.'){
                         if(b[(int)(board[i][j]-'1')]) return false;
                         b[(int)(board[i][j]-'1')] = true;
