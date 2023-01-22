@@ -1,0 +1,54 @@
+// Time Complexity : o(n)
+// Space Complexity : o(n)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+// Your code here along with comments explaining your approach
+/*
+* Level order traversal
+* Each level maintain the max value seen so far
+* add max value to result after processing a level
+* */
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList();
+        if(root == null){
+            return result;
+        }
+        q.add(root);
+        while(!q.isEmpty()){
+            int size = q.size();
+            Integer max = null ;
+            for(int i =0; i< size; i++){
+                TreeNode curr = q.poll();
+                max = max == null ? curr.val : Math.max(max, curr.val);
+                if(curr.left!=null){
+                    q.add(curr.left);
+                }
+                if(curr.right!=null){
+                    q.add(curr.right);
+                }
+            }
+            result.add(max);
+        }
+        return result;
+    }
+}

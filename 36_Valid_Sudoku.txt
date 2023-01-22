@@ -1,0 +1,43 @@
+// Time Complexity : o(n^2)
+// Space Complexity : o(n^2)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+// Your code here along with comments explaining your approach
+/*
+* Have 3 hashmaps. One for row, col, block.
+* if a character is already present (seen) in the HashMap for the specified row then the board is not valid
+* */
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        HashMap<Integer, HashSet<Character>> rmap = new HashMap<>();
+        HashMap<Integer, HashSet<Character>> cmap = new HashMap<>();
+        HashMap<Integer, HashSet<Character>> bmap = new HashMap<>();
+
+        for(int i =0; i< board.length; i++){
+            rmap.put(i, new HashSet<>());
+            cmap.put(i, new HashSet<>());
+            bmap.put(i, new HashSet<>());
+        }
+        for(int i=0; i< board.length; i++){
+            for(int j = 0; j< board[0].length; j++){
+
+                char val = board[i][j];
+                if(val =='.'){
+                    continue;
+                }
+                int bx = i/3;
+                int by = j/3;
+                int bidx = (bx*3) + by;
+                if(rmap.get(i).contains(val) || cmap.get(j).contains(val) || bmap.get(bidx).contains(val)  ){
+                    return false;
+                }
+                rmap.get(i).add(val);
+                cmap.get(j).add(val);
+                bmap.get(bidx).add(val);
+            }
+        }
+
+        return true;
+    }
+}
