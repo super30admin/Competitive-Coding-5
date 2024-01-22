@@ -1,3 +1,4 @@
+// TC: o(n^2) sc: o(n)
 class ValidSudoku {
     int m, n;
     public boolean isValidSudoku(char[][] board) {
