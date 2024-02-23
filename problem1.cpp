@@ -1,68 +1,63 @@
 // Time Complexity : O(n)
-// Space Complexity : O(1)
+// Space Complexity : O(n)
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this :
 
-
 // Your code here along with comments explaining your approach
 
-// we traverse till mid and reverse the second half of the list.
-// we compare one by one node and check if its a palindrome.
+// use level order traversal and at each level we store only the max value in our result array.
 
 /**
- * Definition for singly-linked list.
- * struct ListNode {
+ * Definition for a binary tree node.
+ * struct TreeNode {
  *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class Solution
+{
 public:
-    ListNode* reverseList(ListNode* head)
+    vector<int> largestValues(TreeNode *root)
     {
-        if(head ==NULL){
-            return head;
-        }
-        ListNode* curr = head;
-        ListNode * temp = NULL;
-        ListNode * prev = NULL;
-        while(curr!=NULL)
+        if (root == NULL)
+            return {};
+        queue<TreeNode *> q;
+        q.push(root);
+        vector<int> result;
+        int lvl = 0;
+        while (!q.empty())
         {
-            temp = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = temp;
-        }
-        return prev;  
-    }
-
-    
-    bool isPalindrome(ListNode* head) {
-        if(head == NULL){
-            return false;
-        }
-        ListNode* s = head;
-        ListNode* f = head;
-        ListNode* prev = NULL;
-        while(f!=NULL && f->next!=NULL)
-        {
-            s = s->next;
-            f = f->next->next;
-        }
-        s = reverseList(s);
-        while(head!=NULL && s!=NULL)
-        {
-           // cout << "head val "<< head->val << "  s val " << s->val<< "   ";
-            if(head->val != s->val)
+            int n = q.size();
+            while (n--)
             {
-                return false;
+                TreeNode *curr = q.front();
+                q.pop();
+                if (lvl == result.size())
+                {
+                    result.push_back(curr->val);
+                }
+                else
+                {
+                    if (curr->val > result[lvl])
+                    {
+                        result[lvl] = curr->val;
+                    }
+                }
+                if (curr->left != NULL)
+                {
+                    q.push(curr->left);
+                }
+                if (curr->right != NULL)
+                {
+                    q.push(curr->right);
+                }
             }
-            head= head->next;
-            s= s->next;
+            lvl++;
         }
-        return true;
+        return result;
     }
 };

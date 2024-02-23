@@ -1,48 +1,81 @@
-// Time Complexity :  O(n)
-// Space Complexity :  O(n)
+// Time Complexity : O(1)  as n=9
+// Space Complexity : O(1)
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this :
 
-
 // Your code here along with comments explaining your approach
 
-// we do bottom up recurrsion to avoid repeated calculation of height of a child node.
+// check three parts as commented in the code.
 
-
-
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
+class Solution
+{
 public:
-    bool isBalanced(TreeNode* root) {
-        if(root == NULL) return true;
-        int h = 0;
-        return helper(root,h);
-    }
-    bool helper(TreeNode* root, int &height)
+    bool isValidSudoku(vector<vector<char>> &board)
     {
-        //base
-        if(root==NULL) {
-            height = -1;
-            return true;
-        }
-        
-        //logic
-        int left = 0,right = 0;
-        if(helper(root->left,left) && helper(root->right,right) && (abs(left - right)<=1))
+        if (board.empty() || board.size() == 0)
+            return false;
+
+        unordered_set<int> set;
+        // check each row same column elements
+        for (int i = 0; i < board[0].size(); i++)
         {
-            height = max(left,right) + 1;
-            return true;
+            set.clear();
+            for (int j = 0; j < board.size(); j++)
+            {
+                if (board[j][i] == '.')
+                    continue;
+                if (set.find(board[j][i] - '0') != set.end())
+                {
+                    return false;
+                }
+                else
+                {
+                    set.insert(board[j][i] - '0');
+                }
+            }
         }
-        return false;
+
+        // check each column , same row elements
+        for (int i = 0; i < board.size(); i++)
+        {
+            set.clear();
+            for (int j = 0; j < board[0].size(); j++)
+            {
+                if (board[i][j] == '.')
+                    continue;
+                if (set.find(board[i][j] - '0') != set.end())
+                {
+                    return false;
+                }
+                else
+                {
+                    set.insert(board[i][j] - '0');
+                }
+            }
+        }
+
+        // check each 3*3 box
+        for (int block = 0; block < 9; block++)
+        {
+            set.clear();
+            for (int i = (block / 3 * 3); i < (block / 3 * 3) + 3; i++)
+            {
+                for (int j = (block % 3 * 3); j < (block % 3 * 3) + 3; j++)
+                {
+                    if (board[i][j] == '.')
+                        continue;
+                    if (set.find(board[i][j] - '0') != set.end())
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        set.insert(board[i][j] - '0');
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 };
