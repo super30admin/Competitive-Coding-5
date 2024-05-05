@@ -1,0 +1,23 @@
+Time Complexity: O(1)--> Because given is a 9x9 matrix and at a max we are going to traverse through 81 elements.
+Space Complexity: O(1)--> O(1) because number of combinations could be a 
+maximum of O(number of column)+O(number of rows)+O(number of elements for a grid)
+Approach: Maintain the elements that are already traversed in a set. While add check if the element exists in it already.
+If it exists then return false.
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        Set<String> combinations = new HashSet<String>();
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j]!='.'){
+                    String str = "("+board[i][j]+")";//(4)
+                //If the supplied element exists in the set then return false
+                    if(!combinations.add(str+i) || !combinations.add(j+str) ||
+                        !combinations.add(i/3+str+j/3)) {
+                    return false;
+                  }     
+                }                          
+            }
+        }
+        return true;
+    }
+}

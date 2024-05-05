@@ -1,0 +1,40 @@
+Time Complexity: O(n)
+Space Complexity: O(n)--> breadth of the tree which is O(n/2) equivalent to O(n).
+Challenges: Instead of adding a left and right of popped node, I added root elements left and right.
+Approach: (BFS approach) Traverse through elements in each level. While traversing maintain the initial size of the queue. 
+At each level check the maximum element and add it to the output arraylist.
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> output=new ArrayList<>();
+        Queue<TreeNode> queue= new LinkedList<>();
+        if(root==null) return output;
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size=queue.size();
+            int maximum=Integer.MIN_VALUE;            
+            for(int i=0;i<size;i++){
+                TreeNode node=queue.poll();
+                maximum=Math.max(node.val, maximum);
+                if(node.left!=null) queue.add(node.left);
+                if(node.right!=null) queue.add(node.right);
+            }
+            output.add(maximum);
+        }
+        return output;
+    }
+}
