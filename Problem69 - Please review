@@ -1,0 +1,35 @@
+// Time Complexity :O(n)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :Yes
+
+
+class Solution {
+    
+    func maxValues(_ root: TreeNode?) -> [Int] {
+        guard let root = root else {
+            return []
+        }
+        
+        var result = [Int]()
+        var queue = [TreeNode]()
+        
+        queue.append(root)
+        while !queue.isEmpty {
+            let size = queue.count
+            var maxValue = Int.min
+            for _ in 0..<size {
+                let node = queue.removeFirst()
+                maxValue = max(maxValue, node.val)
+                if let leftNode = node.left {
+                    queue.append(leftNode)
+                }
+                if let rightNode = node.right {
+                    queue.append(rightNode)
+                }
+            }
+            result.append(maxValue)
+        }
+        
+        return result
+    }
+}
