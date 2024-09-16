@@ -1,0 +1,45 @@
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        
+		//36. Valid Sudoku
+        //Time complexity : O(rows*columns)
+        //Space compelxity : O(1)
+        
+         int r = board.length;
+        int c = board[0].length;
+        
+        if(board == null || r!=9 || c!= 9)
+            return false;
+    
+        
+        //created 3 hashsets for rows,columns and boxes
+        
+        HashSet<Integer>[] rows = new HashSet[9];
+        HashSet<Integer> [] cols = new HashSet[9];
+        HashSet<Integer> [] boxes = new HashSet[9];
+        
+        for(int i =0;i<r;i++){
+            rows[i] = new HashSet<>();
+            cols[i] = new HashSet<>();
+            boxes[i] = new HashSet<>();
+        }
+        
+        for(int i =0;i<r;i++){
+            for(int j=0;j<c;j++){
+                int number = (int)(board[i][j]);
+                     if (number != '.') {
+    
+                    int box_index = (i/3)*3 + (j/3);
+                    if((!rows[i].add(number) )
+                       ||
+                      (!cols[j].add(number))
+                      ||
+                      (!boxes[box_index].add(number))
+                      )
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+}
