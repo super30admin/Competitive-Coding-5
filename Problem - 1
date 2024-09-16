@@ -1,0 +1,44 @@
+// Time Complexity : O(n) - where n is the number of nodes.
+// Space Complexity : O(n/2)-> all the n/2 leaf nodes  will be added to the queue.
+// Did this code successfully run on Leetcode : Yes.
+// Any problem you faced while coding this : No.
+// Your code here along with comments explaining your approach : My approach is using a queue to perform level order traversal and add the maximum element at each level to the result list.
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    List<Integer> ans;
+    public List<Integer> largestValues(TreeNode root) {
+        ans= new ArrayList<Integer>();
+        if(root==null) return ans;
+        Queue<TreeNode> q=new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            int size=q.size();
+            int max=Integer.MIN_VALUE;
+            for(int i=0;i<size;i++){
+                TreeNode curr=q.poll();
+                if(curr!=null && max<curr.val){
+                    max=curr.val;
+                }
+                if(curr.left!=null)q.add(curr.left);
+                if(curr.right!=null) q.add(curr.right);
+            }
+            ans.add(max);
+        }
+       return ans; 
+    }
+}
