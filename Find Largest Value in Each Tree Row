@@ -1,0 +1,26 @@
+Approach 1 : BFS
+Time Complexity : O(N)
+Space Complexity :O(N)
+
+# Definition for a binary tree node.
+class TreeNode:
+     def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]: ##3 Level order Tarver
+        self.res = []
+        if root is None : return self.res ## Edge Case
+        self.dfs(root,0)
+        return self.res
+    def dfs(self,root,level):
+        ## Base case
+        if root is None :
+            return 
+        ## logic
+        if level ==len(self.res):
+            self.res.append([])
+        self.res[level].append(root.val)
+        self.dfs(root.left,level+1)
+        self.dfs(root.right,level+1)
