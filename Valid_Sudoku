@@ -1,0 +1,27 @@
+//TimeComplexity O(m*n)
+//SpaceComplexity O(3(m*n))
+
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        HashSet<String> set = new HashSet<>();
+        int m = board.length;
+        int n = board[0].length;
+
+        for(int i = 0 ; i < m; i++){
+            for(int j = 0 ; j < n ; j++){
+if(board[i][j] != '.'){
+ if(set.contains(board[i][j] + " " + 'R' + " " + i) || set.contains(board[i][j] + " " + 'C' + " " + j) ||  set.contains(board[i][j] + " " + 'R' + " " + i/3 + " " + 'C' + " " + j/3)){
+                    System.out.println(i + " " + j);
+                    return false;
+                }else{
+                    set.add(board[i][j] + " " + 'R' + " " + i);
+                    set.add(board[i][j] + " " + 'C' + " " + j);
+                    set.add(board[i][j] + " " + 'R' + " " + i/3 + " " + 'C' + " " + j/3);
+                }
+} 
+               
+            }
+        }
+        return true;
+    }
+}

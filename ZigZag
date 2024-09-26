@@ -1,0 +1,39 @@
+//TimeComplexity
+//Spacecomplexity
+
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(root == null)return result;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        int level = 0;
+        while(!q.isEmpty()){
+            int size = q.size();
+            List<Integer> list = new ArrayList<>();
+                for(int i = 0; i < size; i++){
+                    TreeNode curr = q.poll();
+                    list.add(curr.val);
+                    if(curr.left != null)q.add(curr.left);
+                    if(curr.right != null)q.add(curr.right);
+                }
+            if(level % 2 == 1){                
+               list = reverseList(list);
+            }
+            level++;
+          
+            
+            result.add(list);       
+    }
+        return result;
+    }
+    
+    private List<Integer> reverseList(List<Integer> list){
+        List<Integer> output = new ArrayList<>();
+        
+        for(int i = list.size()-1 ; i >= 0; i--){
+            output.add(list.get(i));
+        }
+        return output;
+    }
+}
