@@ -1,0 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+
+let result = [];
+var largestValues = function(root) {
+    result = [];
+    if(root == null ) return [];
+    dfs(root,0);
+    return result;
+    
+};
+
+var dfs = function(root,level){
+    //base
+    if(root == null) return;
+    
+    //logic
+    if(result.length == level){
+        result.push(root.val);
+    } else {
+        if(root.val > result[level]){
+            result[level] = root.val;
+        }
+    }
+    dfs(root.left,level+1);
+    dfs(root.right,level+1);
+    
+}
+
+//time complexity : O(n), n: no of nodes
+//space complexity : O(h), h: height of the tree
