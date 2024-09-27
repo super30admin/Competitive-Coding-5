@@ -1,0 +1,41 @@
+class Solution:
+      
+    
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        
+        nrows, ncols = len(board), len(board[0]);
+        rows = [set() for i in range(nrows)]
+        cols = [set() for i in range(ncols)]
+        boxes = [set() for i in range(nrows)]
+        
+        for i in range(nrows):
+            for j in range(ncols):
+                if(board[i][j] != '.'):
+                    # check whether elt present in same row
+                    if(board[i][j] in rows[i]):
+                        return False;
+                    rows[i].add(board[i][j]);
+                    
+                    # check whether elt present in same col
+                    if(board[i][j] in cols[j]):
+                        return False;
+                    cols[j].add(board[i][j]);
+                    
+                    # check whether the elt present in same block or not
+                    boxidx = (i//3)*3 + (j//3)
+                    if(board[i][j] in boxes[boxidx]):
+                        return False;
+                    boxes[boxidx].add(board[i][j]);
+        return True;
+    
+    '''
+    n = 9
+    time complexity = O(n^2)
+    space complexity = O(n^2)
+    '''
+                    
+        
+        
+        
+                
+        
