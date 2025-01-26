@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -83,5 +84,7 @@ public class LargestValuesInTreeLevel {
         LargestValuesInTreeLevel obj = new LargestValuesInTreeLevel();
         List<Integer> largestValues = obj.largestValues(n1);
         System.out.println(largestValues);
+        List<Integer> expected = Arrays.asList(1,3,9);
+        assert (expected.equals(largestValues));
     }
 }
