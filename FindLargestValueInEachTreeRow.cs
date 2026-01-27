@@ -33,3 +33,35 @@ public class Solution
         DFS(node.right, level + 1, result);
     }
 }
+
+//BFS
+public class Solution {
+    List<int> list = new();
+    public IList<int> LargestValues(TreeNode root) {
+        Queue<TreeNode> q = new Queue<TreeNode>();
+        q.Enqueue(root);
+        if (root == null)
+            return list;
+        while(q.Count > 0)
+        {
+            int size = q.Count();
+            int max = int.MinValue;
+            for(int i=0;i<size;i++)
+            {
+                TreeNode cur = q.Dequeue();
+                max = Math.Max(max,cur.val);
+                
+                if(cur.left!=null)
+                {
+                    q.Enqueue(cur.left);
+                }
+                if(cur.right!=null)
+                {
+                    q.Enqueue(cur.right);
+                }
+            }
+        list.Add(max);
+        }
+        return list;
+    }
+}
