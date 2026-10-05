@@ -1,0 +1,33 @@
+class Solution {
+    /* Approach: there are 3 rules 
+    1. Row should not have repeat 
+    2. Column should not have repeat 
+    3. Box should not have repeat. 
+    I am taking set and will add value number board[row][j] present in row, col and box. If we try to add same number/ string in the set it will return false.
+    
+    Time: Its a 9* 9 grid means O(1)
+    Space: Set will consist of maxium 9*9*9 strings that is constant=> O(1)
+    */
+    public boolean isValidSudoku(char[][] board) {
+        if (board == null)
+            return true;
+        Set<String> set = new HashSet<>();
+        int rows = board.length;
+        int cols = board[0].length;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (board[row][col] != '.') {
+                    if (!set.add(board[row][col] + "present in row " + row))
+                        return false;
+                    if (!set.add(board[row][col] + "present in col " + col))
+                        return false;
+                    if (!set.add(board[row][col] + "present in box " + row / 3 + "-" + col / 3))
+                        return false;
+
+                }
+            }
+
+        }
+        return true;
+    }
+}
